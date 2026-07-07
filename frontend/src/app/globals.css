@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Reset для более предсказуемого поведения */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Фиксированные настройки и переменные - PornHub стиль */
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 0, 0, 0;
+  --header-height: 64px;
+  --pornhub-orange: #FF9000;
+  --pornhub-yellow: #FFC107;
+  --pornhub-dark: #1a1a1a;
+  --pornhub-darker: #0d0d0d;
+}
+
+/* Стили для предотвращения сдвигов */
+html {
+  overflow-x: hidden;
+  scroll-padding-top: var(--header-height);
+  background: black;
+}
+
+body {
+  background: rgb(var(--background-rgb));
+  color: rgb(var(--foreground-rgb));
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* Фиксированные стили заголовка - PornHub стиль */
+.dashboard-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: var(--header-height);
+  z-index: 50;
+  background-color: black;
+  border-bottom: 1px solid #333;
+  box-shadow: 0 1px 3px rgba(255, 144, 0, 0.3);
+}
+
+.dashboard-header-inner {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.dashboard-logo-container {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  padding-left: 1.5rem;
+}
+
+.dashboard-actions-container {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-right: 1.5rem;
+}
+
+/* Общие стили */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Добавляем анимацию для уведомления о копировании */
+  .animate-fade-in-out {
+    animation: fadeInOut 2s ease-in-out;
+  }
+
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    10% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    90% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+}
+
+/* Стили для активных ссылок навигации - PornHub стиль */
+.active {
+  @apply bg-orange-500/20 text-orange-400 font-medium;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Глобальные стили для единообразия верстки */
+.hover-animation {
+  transition: all 0.3s ease;
+}
+
+.hover-animation:hover {
+  transform: translateY(-2px);
+}
+
+/* Анимации для плавающих технологических элементов */
+@keyframes float-0 {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-20px) translateX(10px); }
+  50% { transform: translateY(10px) translateX(20px); }
+  75% { transform: translateY(15px) translateX(-10px); }
+}
+
+@keyframes float-1 {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(15px) translateX(-20px); }
+  50% { transform: translateY(-10px) translateX(-15px); }
+  75% { transform: translateY(-20px) translateX(10px); }
+}
+
+@keyframes float-2 {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-15px) translateX(-10px); }
+  50% { transform: translateY(20px) translateX(15px); }
+  75% { transform: translateY(10px) translateX(-20px); }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 30 100% 50%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 30 100% 50%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 30 100% 50%;
+    --chart-1: 30 100% 50%;
+    --chart-2: 45 100% 60%;
+    --chart-3: 15 100% 40%;
+    --chart-4: 60 100% 60%;
+    --chart-5: 0 100% 60%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 30 100% 50%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 30 100% 50%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 30 100% 50%;
+    --chart-1: 30 100% 50%;
+    --chart-2: 45 100% 60%;
+    --chart-3: 15 100% 40%;
+    --chart-4: 60 100% 60%;
+    --chart-5: 0 100% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
