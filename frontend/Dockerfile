@@ -73,7 +73,7 @@ EXPOSE 3000
 
 # Проверка работоспособности приложения
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD wget -q -O- http://localhost:3000/ || exit 1
+    CMD wget -q -O- http://127.0.0.1:3000/ || exit 1
 
 # Запускаем приложение
 CMD ["node", "server.js"] 
