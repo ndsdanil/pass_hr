@@ -29,8 +29,13 @@ COPY --from=deps /app/node_modules ./node_modules
 # Копируем исходный код
 COPY . .
 
+# Публичный URL API вшивается в клиентский бандл во время сборки.
+# По умолчанию относительный /api/v1 (тот же домен, проксируется nginx на бэкенд).
+ARG NEXT_PUBLIC_API_URL=/api/v1
+
 # Устанавливаем переменные окружения для сборки
 ENV NODE_ENV=production \
+    NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL \
     NEXT_TELEMETRY_DISABLED=1 \
     NEXT_STANDALONE=true \
     NEXT_IGNORE_TS_ERRORS=true \
