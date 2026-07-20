@@ -30,7 +30,7 @@ class Settings(BaseSettings):
     RABBITMQ_HOST: str = "localhost"
     RABBITMQ_PORT: int = 5672
     RABBITMQ_USERNAME: str = "admin"
-    RABBITMQ_PASSWORD: str = "adminQ0w9e8r7t6y5"
+    RABBITMQ_PASSWORD: str = ""
     RABBITMQ_QUEUE: str = "resume_tuning_queue"
     RABBITMQ_RESULTS_QUEUE: str = "resume_tuning_results_queue"
     

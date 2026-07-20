@@ -3,11 +3,11 @@
 
 set -e
 
-host="postgres"
-port="5432"
-user="postgres"
-password="postgresQ0w9e8r7t6y5"
-db="resume_tuner"
+host="${POSTGRES_HOST:-postgres}"
+port="${POSTGRES_PORT:-5432}"
+user="${POSTGRES_USER:-postgres}"
+password="${POSTGRES_PASSWORD}"
+db="${POSTGRES_DB:-resume_tuner}"
 
 echo "Waiting for PostgreSQL..."
 

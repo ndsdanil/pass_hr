@@ -44,7 +44,7 @@ class RabbitMQClient:
         self.host = host or os.getenv('RABBITMQ_HOST', 'localhost')
         self.port = port or int(os.getenv('RABBITMQ_PORT', '5672'))
         self.username = username or os.getenv('RABBITMQ_USERNAME', 'admin')
-        self.password = password or os.getenv('RABBITMQ_PASSWORD', 'adminQ0w9e8r7t6y5')
+        self.password = password or os.getenv('RABBITMQ_PASSWORD', '')
         self.queue_name = queue_name or os.getenv('RABBITMQ_QUEUE', 'resume_tuning_queue')
         
         self.connection = None

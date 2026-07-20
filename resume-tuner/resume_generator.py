@@ -36,7 +36,7 @@ OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
 RABBITMQ_HOST: str = os.getenv("RABBITMQ_HOST", "localhost")
 RABBITMQ_PORT: int = int(os.getenv("RABBITMQ_PORT", "5672"))
 RABBITMQ_USERNAME: str = os.getenv("RABBITMQ_USERNAME", "admin")
-RABBITMQ_PASSWORD: str = os.getenv("RABBITMQ_PASSWORD", "adminQ0w9e8r7t6y5")
+RABBITMQ_PASSWORD: str = os.getenv("RABBITMQ_PASSWORD", "")
 QUEUE_NAME: str = os.getenv("RABBITMQ_QUEUE", "resume_tuning_queue")
 RESULTS_QUEUE_NAME: str = os.getenv("RABBITMQ_RESULTS_QUEUE", "resume_tuning_results_queue")
 

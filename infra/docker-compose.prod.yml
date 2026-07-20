@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:5000:3000"
+    depends_on:
+      - backend
+    env_file:
+      - .env
+    environment:
+      - NEXT_STANDALONE=true
+    restart: unless-stopped
+    networks:
+      - hr-plus-network
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - hr-plus-network
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:5001:8000"
+    volumes:
+      - backend_data:/app/data
+    env_file:
+      - .env
+    environment:
+      - PYTHONPATH=/app
+    restart: unless-stopped
+    depends_on:
+      - rabbitmq
+      - resume-tuner
+      - postgres
+    networks:
+      - hr-plus-network
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    hostname: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    restart: unless-stopped
+    networks:
+      - hr-plus-network
+
+  resume-tuner:
+    build:
+      context: ../resume-tuner
+      dockerfile: Dockerfile
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - RABBITMQ_HOST=${RABBITMQ_HOST}
+      - RABBITMQ_USERNAME=${RABBITMQ_USERNAME}
+      - RABBITMQ_PASSWORD=${RABBITMQ_PASSWORD}
+      - RABBITMQ_QUEUE=resume_tuning_queue
+      - RABBITMQ_RESULTS_QUEUE=resume_tuning_results_queue
+    command: python resume_generator.py --rabbitmq
+    restart: unless-stopped
+    depends_on:
+      - rabbitmq
+    networks:
+      - hr-plus-network
+
+networks:
+  hr-plus-network:
+    driver: bridge
+
+volumes:
+  rabbitmq_data:
+  backend_data:
+  postgres_data:
